@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}HomePage{% endblock %}
+{% block user-info %}
+    {{user.first_name}} {{user.last_name}} </br>
+    username:{{user.username}}
+    <form action="/logout/" method="get">
+        <input type="submit" value="Logout">
+    </form>
+    Hello {{ request.user.first_name }},You can 
+    <a href="{% url 'edit'  %}">Update your profile</a>,
+    <a href="{% url 'vewyourprofile'  %}">View Your Profile</a>,
+    <a href="{% url 'homepage' %}">Go To Home Page</a>,
+    <a href="{% url 'index' %}">Go To Welcome Page</a>.
+{% endblock %}
+
+{% block content %}
+
+    <h2>Share Your Thoughts!</h2>
+    <form method="POST" class="post-form">
+    {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" >Save</button>
+        </form>
+    
+{% endblock %}

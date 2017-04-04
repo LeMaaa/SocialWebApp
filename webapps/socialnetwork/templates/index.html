@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Welcom!{% endblock %}
+
+{% block content %}
+    <h2>Welcome!</h2>
+    <span class="user">
+       {% if request.user.is_authenticated %}
+           Hello {{ request.user.first_name }},You can 
+           <a href="{% url 'post'  %}">Post your idea</a>,
+           <a href="{% url 'edit'  %}">Update Your Profile</a>,
+           <a href="{% url 'homepage' %}">Go To Homepage</a>,
+           <a href="{% url 'logout' %}">Logout</a>.
+
+       {% else %}
+           Hello,visitor, you can
+           <a href="{% url 'login' %}">Login</a>.
+       {% endif %}
+    </span>
+</div>
+
+{% endblock %}

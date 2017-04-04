@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}HomePage{% endblock %}
+
+{% block user-info %}
+    {{user.first_name}} {{user.last_name}} </br>
+    username:{{user.username}}
+    <form action="/logout/" method="get">
+        <input type="submit" value="Logout">
+    </form>
+{% endblock %}
+
+{% block content %}
+    <h2>HomePage</h2>
+    <a href="{% url 'post'  %}">Post your idea</a>
+    <a href="{% url 'edit'  %}">Update Your Profile</a>,
+    <a href="{% url 'vewyourprofile'  %}">View Your Profile</a>
+    <a href="{% url 'index' %}">Go To Welcome Page</a>.
+    {% for post in Posts %}
+        <div class = 'user_post'>
+         {{post.posts_content}}
+          <p class = 'postinfo'>{{post.post_time}}</p>
+          <img src= "{%url 'picture' id=post.user.userprofile.id %}" alt= "Wrong" height="50" width="50">
+          <a href="{% url 'profile' pk=post.user %}">{{post.user.username}}</a><br>
+         
+
+          <form action="{%url 'follow' id=post.user.id %}" method="post">
+          <input type="submit"  value="follow">
+          <input type="hidden" name="friend" value="{{user_profile.user.id}}">
+          {% csrf_token %}
+          </form>
+
+
+          <form action="{%url 'unfollow' id=post.user.id %}" method="post">
+<!--        {%url 'unfollow' id=post.user.id %} -->
+          <input type="submit"  value="unfollow">
+          <input type="hidden" name=“friend” value="{{user_profile.user.id}}">
+           {% csrf_token %}
+          </form>
+
+        </div>
+<div>
+    <label>Comment to add:</label>
+    <input id="comment{{post.id}}" type="text" name="comment{{post.id}}">
+    <button onclick="addComment({{post.id}})">Add Comment</button>
+    <span id="error" class="error"></span>
+</div>
+    <ol id="commentslist{{post.id}}"></ol>
+    </ol>
+    
+    {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Your Profile{% endblock %}
+{% block content %}
+    Hello {{ request.user.first_name }},You can 
+    <a href="{% url 'edit'  %}">Update your profile</a>,
+    <a href="{% url 'post'  %}">Post your idea</a>,
+    <a href="{% url 'homepage' %}">Go To Home Page</a>,
+    <a href="{% url 'index' %}">Go To Welcome Page</a>.
+
+    <div class="error">
+    {{message}}
+    </div>
+        <div class="userinfo">
+            <br>
+        {% if yourprofile.picture %}
+        Your photo: <br>
+        <img src= "{%url 'picture' id=yourprofile.id %}" alt= "Wrong" width="200px"><br>
+        {% endif %}
+        {% if not yourprofile.picture %}
+            <td>picture: Upload you picture</td><br>
+        {% endif %}
+        <div> 
+        Your friends:
+        {% for friend in friends %}
+        {{ friend.username }},
+        {% endfor %}
+        </div>
+        <tr> 
+          <td>username:{{yourprofile.user.username}}</td><br>
+          <td>bio:{{yourprofile.bio}}</td><br>
+          <td>yourage:{{userage}}</td><br>
+        </tr>
+        </div>
+        <div class="post">
+        Your posts: <br>
+       {% for post in all_posts %}
+        <h1>{{ post.title }}</h1>
+        <div class = 'user_post'>
+         {{post.posts_content}}
+            <p class = 'postinfo'>{{post.post_time}}</p>
+        </div>
+        <ol id="commentslist{{post.id}}"></ol>
+    </ol>
+    {% endfor %}
+        </div>
+   
+
+
+{% endblock %}

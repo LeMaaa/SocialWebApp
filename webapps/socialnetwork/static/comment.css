@@ -1,0 +1,36 @@
+ h1 a {
+        color: #FCA205;
+        font-family: 'Lobster', cursive;
+    }
+body {
+        padding-left: 15px;
+
+
+    }
+
+ h1, h2, h3, h4 {
+        font-family: 'Lobster', cursive;
+   }
+
+.date {
+        float: right;
+        color: #828282;
+    }
+
+.header{
+	background-color: #FFFACD;
+        margin-top: 0;
+        padding: 20px 30px 40px 40px;
+        font-family: 'Lobster', cursive;
+        font-size: 42pt;
+}
+
+.user-info {
+	font-size: 12pt;
+	font-family: 'Lobster', fantasy;
+}
+
+#content {
+	font-family: 'Lobster', cursive;
+}
+

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Register Please!{% endblock %}
+
+{% block content%}
+
+{% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+
+{% endif %}
+
+{% for field,error in form.errors.items %}
+{{ error|striptags }}
+{{ form.non_field_errors }}
+{% endfor %}
+
+  <h2>Please Register Here</h2>
+    <form  action = "" method="post" action="{% url 'register' %}">
+        <table>
+            {{form}}
+        </table>
+        {% csrf_token %}
+        <input type="submit" value="Register" />
+    </form>
+
+{%endblock%}

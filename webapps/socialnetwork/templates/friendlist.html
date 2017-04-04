@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Frienslist{% endblock %}
+
+{% block user-info %}
+    {{user.first_name}} {{user.last_name}} </br>
+    username:{{user.username}}
+    <form action="/logout/" method="get">
+        <input type="submit" value="Logout">
+    </form>
+{% endblock %}
+{% if errors %}
+  {{errors}}
+{% endif%}
+
+{% block content %}
+    <h2>FriendList</h2>
+    <a href="{% url 'post'  %}">Post your idea</a>
+    <a href="{% url 'edit'  %}">Update Your Profile</a>,
+    <a href="{% url 'vewyourprofile'  %}">View Your Profile</a>,
+    <a href="{% url 'homepage' %}">Go To Home Page</a>,
+    <a href="{% url 'index' %}">Go To Welcome Page</a>.
+        <div> 
+        Your friends:
+        {% for friend in friends %}
+        {{ friend.username }},
+        {% endfor %}
+        </div>
+
+        <div> 
+        Their posts:<br>
+        {% for post in posts %}
+        <div>
+         <img src= "{%url 'picture' id=post.user.userprofile.id %}" alt= "Wrong" height="50" width="50">
+         username:{{ post.user.username }}<br>
+         title:{{post.posts_title}}<br>
+         content:{{ post.posts_content}}<br>
+         <div>
+    <label>Comment to add:</label>
+    <input id="comment{{post.id}}" type="text" name="comment{{post.id}}">
+    <button onclick="addComment({{post.id}})">Add Comment</button>
+    <span id="error" class="error"></span>
+</div>
+    <ol id="commentslist{{post.id}}"></ol>
+    </ol>
+        {% endfor %}
+        </div>
+        </div>
+        
+{% endblock %}

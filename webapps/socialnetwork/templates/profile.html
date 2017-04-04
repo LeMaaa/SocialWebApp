@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+{% if errors %}
+        <p style="color:red">
+            {{errors}}
+        </p>
+    {% endif %}
+
+    <h2>{{username}}'Profile</h2>
+
+
+    {% for post in Posts %}
+        <div class = 'user_post'>
+         {{post.posts_content}}
+            <p class = 'postinfo'>{{post.post_time}}</p>
+        </div>
+        <div>
+    <label>Comment to add:</label>
+    <input id="comment{{post.id}}" type="text" name="comment{{post.id}}">
+    <button onclick="addComment({{post.id}})">Add Comment</button>
+    <span id="error" class="error"></span>
+</div>
+    <ol id="commentslist{{post.id}}"></ol>
+    </ol>
+    {% endfor %}
+
+
+{% endblock %}

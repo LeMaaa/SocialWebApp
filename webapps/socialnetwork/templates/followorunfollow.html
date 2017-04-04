@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+{% if errors %}
+        <p style="color:red">
+            {{errors}}
+        </p>
+    {% endif %}
+
+    <h2>{{username}}'Profile</h2>
+    
+    {% if followed  %}
+        <form class = 'followstatus' action="/unfollow/" method="POST" value = '{{username}}'>
+        <input type="submit" class="followbutton" value="unfollow">
+        <input type="hidden" name="friend" value="{{username}}">
+        {% csrf_token %}
+        </form>
+    {% endif %}
+
+    {% if not followed %}
+        <form class = 'followstatus' action="/follow/" method="POST" value = '{{username}}'>
+        <input type= 'submit' class="followbutton" value="following">
+        <input type="hidden" name='friend' value="{{username}}">
+        {% csrf_token %}
+        </form>
+        {% endif %}
+        
+    {% for post in Posts %}
+        <div class = 'user_post'>
+         {{post.posts_content}}
+            <p class = 'postinfo'>{{post.post_time}}</p>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}
